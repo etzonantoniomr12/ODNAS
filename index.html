@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#15396b">
+  <title>ODNA's</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">O</span><div><b>ODNA's</b><small>Gestor de documentos</small></div></div>
+    <button id="btn-home" class="icon-btn" aria-label="Inicio">⌂</button>
+  </header>
+
+  <main>
+    <!-- ETAPA 1: Crear / abrir proyecto -->
+    <section id="view-project" class="view active">
+      <div class="hero">
+        <span class="eyebrow">ETAPA 1 DE 3</span>
+        <h1>Crear un proyecto ODNA</h1>
+        <p>Indica la carpeta origen (Excel) y la carpeta destino en Drive donde se guardarán los Sheets convertidos.</p>
+      </div>
+      <form id="project-form" class="card form-card">
+        <label>Enlace de la carpeta <b>origen</b> (contiene los .xlsx)
+          <textarea id="source-url" required rows="3" placeholder="https://drive.google.com/drive/folders/..."></textarea>
+        </label>
+        <label>Enlace de la carpeta <b>destino</b> (donde se crearán los Sheets)
+          <textarea id="destination-url" required rows="3" placeholder="https://drive.google.com/drive/folders/..."></textarea>
+        </label>
+        <button class="primary full" type="submit">CREAR Y PROCESAR</button>
+      </form>
+      <button id="btn-last-project" class="text-btn hidden">Continuar último proyecto</button>
+    </section>
+
+    <!-- ETAPA 2: Lista de documentos -->
+    <section id="view-documents" class="view">
+      <div class="section-head">
+        <div><span class="eyebrow">ETAPA 2 DE 3</span><h2 id="project-title">Documentos</h2></div>
+        <span id="project-progress" class="pill">0/0</span>
+      </div>
+      <div id="document-list" class="document-list"></div>
+      <div class="bottom-action">
+        <button id="btn-retry" class="retry-btn hidden">↺ REINTENTAR ERRORES</button>
+        <button id="btn-drive" class="drive-btn">▣ COPIAR ENLACE DE DRIVE</button>
+      </div>
+    </section>
+
+    <!-- ETAPA 2b: Revisión de ítems -->
+    <section id="view-review" class="view">
+      <div class="review-head">
+        <button id="btn-back-docs" class="icon-btn">←</button>
+        <div><small id="review-document"></small><b id="review-counter">Ítem 1 de 1</b></div>
+        <span id="review-status" class="pill">Pendiente</span>
+      </div>
+      <article class="review-card">
+        <div id="photo-box" class="photo-box"><div class="photo-placeholder">Fotografía no disponible</div></div>
+        <div id="item-data" class="item-grid"></div>
+        <label class="activity-label">ACTIVIDAD OFERTADA
+          <select id="activity-select"><option value="">Seleccione una actividad</option></select>
+        </label>
+        <button id="btn-caution" class="danger-outline">MEDIDA CAUTELAR</button>
+      </article>
+      <div class="review-nav">
+        <button id="btn-prev" class="secondary">ANTERIOR</button>
+        <button id="btn-next" class="primary">SIGUIENTE</button>
+      </div>
+    </section>
+
+    <!-- ETAPA 3: Finalizar -->
+    <section id="view-finish" class="view finish-view">
+      <div class="success-icon">✓</div>
+      <span class="eyebrow">ETAPA 3 DE 3</span>
+      <h2>Revisión completada</h2>
+      <p>Las decisiones están listas para escribirse en el Sheet.</p>
+      <button id="btn-apply" class="primary full">GENERAR ACTIVIDAD OFERTADA</button>
+      <button id="btn-return-docs" class="secondary full">VOLVER A DOCUMENTOS</button>
+    </section>
+  </main>
+
+  <div id="loader" class="overlay hidden"><div class="loader-card"><span class="spinner"></span><b id="loader-title">Procesando</b><p id="loader-text">Espera un momento…</p></div></div>
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
